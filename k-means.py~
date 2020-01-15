@@ -1,0 +1,36 @@
+import pymongo
+from pymongo import MongoClient
+import matplotlib as plt
+import pandas as pd
+import os
+
+client =  MongoClient("localhost", 27017)
+db = client["gw-data"]
+col = db["methane_emissions"]
+
+
+def main():
+    show_current_dir()
+    f = input("File to load (csv): ")
+    load_data(f)
+    
+def load_data(file):
+    df = pd.read_csv(file) 
+
+def generate_clusters():
+    return None
+
+def show_current_dir():
+    #csv files must be in the same directory as the script
+    #print the files in the current directory
+    cwd = os.getcwd()
+    for subdir, dirs, files in os.walk(cwd, topdown=True):
+        del dirs[:] #remove sub directories.
+        for file in files:
+            print(file)
+
+
+if __name__=="__main__":
+    main()
+
+
